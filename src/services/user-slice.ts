@@ -11,6 +11,7 @@ import {
 } from '../utils/burger-api';
 import { setCookie, getCookie, deleteCookie } from '../utils/cookie';
 import { TUser, TOrder } from '@utils-types';
+import { stat } from 'fs';
 
 interface UserState {
   user: TUser | null;
@@ -212,7 +213,8 @@ const userSlice = createSlice({
     loading: (state) => state.loading,
     userOrders: (state) => state.orders,
     responseError: (state) => state.error,
-    isAuthenticated: (state) => state.isAuthenticated
+    isAuthenticated: (state) => state.isAuthenticated,
+    isAuthChecked: (state) => state.isAuthChecked
   }
 });
 
@@ -220,5 +222,11 @@ export const { authChecked } = userSlice.actions;
 
 export default userSlice.reducer;
 
-export const { userData, loading, userOrders, responseError, isAuthenticated } =
-  userSlice.selectors;
+export const {
+  userData,
+  loading,
+  userOrders,
+  responseError,
+  isAuthenticated,
+  isAuthChecked
+} = userSlice.selectors;

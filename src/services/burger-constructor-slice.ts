@@ -102,6 +102,11 @@ export const burgerConstructorSlice = createSlice({
         state.constructorItems.ingredients = [];
         state.error = null;
       });
+  },
+  selectors: {
+    getConstructorItems: (state) => state.constructorItems,
+    getOrderRequest: (state) => state.orderRequest,
+    getOrderModalData: (state) => state.orderModalData
   }
 });
 
@@ -114,3 +119,6 @@ export const {
   moveDownIngredient,
   clearOrder
 } = burgerConstructorSlice.actions;
+
+export const { getConstructorItems, getOrderRequest, getOrderModalData } =
+  burgerConstructorSlice.selectors;

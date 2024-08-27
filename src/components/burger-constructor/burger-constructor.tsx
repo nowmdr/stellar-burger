@@ -6,13 +6,15 @@ import { isAuthenticated } from '../../services/user-slice';
 import { useNavigate } from 'react-router-dom';
 import {
   createOrder,
-  clearOrder
+  clearOrder,
+  getConstructorItems,
+  getOrderRequest,
+  getOrderModalData
 } from '../../services/burger-constructor-slice';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const authenticated = useSelector(isAuthenticated);
   const constructorItems = useSelector(
     (state: RootState) => state.burgerConstructor.constructorItems
   );
@@ -24,6 +26,12 @@ export const BurgerConstructor: FC = () => {
   const orderModalData = useSelector(
     (state: RootState) => state.burgerConstructor.orderModalData
   );
+  /** TODO: Ошибка при использовании селекторов из среза */
+
+  const authenticated = useSelector(isAuthenticated);
+  // const constructorItems = useSelector(getConstructorItems);
+  // const orderRequest = useSelector(getOrderRequest);
+  // const orderModalData = useSelector(getOrderModalData);
 
   const onOrderClick = () => {
     if (!authenticated) {

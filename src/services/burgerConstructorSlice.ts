@@ -110,7 +110,7 @@ export const burgerConstructorSlice = createSlice({
   }
 });
 
-export default burgerConstructorSlice.reducer;
+export default burgerConstructorSlice;
 
 export const {
   addIngredient,

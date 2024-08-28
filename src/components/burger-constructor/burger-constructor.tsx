@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useSelector, useDispatch, RootState } from '../../services/store';
+import { useSelector, useDispatch } from '../../services/store';
 import { isAuthenticated } from '../../services/user-slice';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -10,28 +10,16 @@ import {
   getConstructorItems,
   getOrderRequest,
   getOrderModalData
-} from '../../services/burger-constructor-slice';
+} from '../../services/burgerConstructorSlice';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const constructorItems = useSelector(
-    (state: RootState) => state.burgerConstructor.constructorItems
-  );
-
-  const orderRequest = useSelector(
-    (state: RootState) => state.burgerConstructor.orderRequest
-  );
-
-  const orderModalData = useSelector(
-    (state: RootState) => state.burgerConstructor.orderModalData
-  );
-  /** TODO: Ошибка при использовании селекторов из среза */
 
   const authenticated = useSelector(isAuthenticated);
-  // const constructorItems = useSelector(getConstructorItems);
-  // const orderRequest = useSelector(getOrderRequest);
-  // const orderModalData = useSelector(getOrderModalData);
+  const constructorItems = useSelector(getConstructorItems);
+  const orderRequest = useSelector(getOrderRequest);
+  const orderModalData = useSelector(getOrderModalData);
 
   const onOrderClick = () => {
     if (!authenticated) {

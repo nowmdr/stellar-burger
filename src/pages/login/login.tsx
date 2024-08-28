@@ -6,7 +6,7 @@ import {
   loginUser,
   responseError,
   isAuthenticated
-} from '../../services/user-slice';
+} from '../../services/slices/userSlice';
 
 export const Login: FC = () => {
   const dispatch = useDispatch();

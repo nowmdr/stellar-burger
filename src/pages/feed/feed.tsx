@@ -3,11 +3,15 @@ import { FeedUI } from '@ui-pages';
 import { TOrder } from '@utils-types';
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
-import { fetchFeeds, allOrders, loading } from '../../services/feed-slice';
+import {
+  fetchFeeds,
+  getAllOrders,
+  loading
+} from '../../services/slices/feedSlice';
 
 export const Feed: FC = () => {
   const dispatch = useDispatch();
-  const Orders: TOrder[] = useSelector(allOrders);
+  const Orders: TOrder[] = useSelector(getAllOrders);
   const isLoading: boolean = useSelector(loading);
 
   useEffect(() => {

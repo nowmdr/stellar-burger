@@ -16,8 +16,8 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { useEffect } from 'react';
 import { useDispatch } from '../../services/store';
-import { fetchIngredients } from '../../services/ingredientsSlice';
-import { checkUserAuth } from '../../services/user-slice';
+import { fetchIngredients } from '../../services/slices/ingredientsSlice';
+import { checkUserAuth } from '../../services/slices/userSlice';
 
 import { AppHeader } from '@components';
 

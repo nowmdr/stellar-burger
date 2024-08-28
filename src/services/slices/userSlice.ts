@@ -8,8 +8,8 @@ import {
   logoutApi,
   updateUserApi,
   getOrdersApi
-} from '../utils/burger-api';
-import { setCookie, getCookie, deleteCookie } from '../utils/cookie';
+} from '../../utils/burger-api';
+import { setCookie, getCookie, deleteCookie } from '../../utils/cookie';
 import { TUser, TOrder } from '@utils-types';
 import { stat } from 'fs';
 
@@ -220,7 +220,7 @@ const userSlice = createSlice({
 
 export const { authChecked } = userSlice.actions;
 
-export default userSlice.reducer;
+export default userSlice;
 
 export const {
   userData,

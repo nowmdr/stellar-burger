@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, FC } from 'react';
-import { getAllIngredients } from '../../services/ingredientsSlice';
+import { getAllIngredients } from '../../services/slices/ingredientsSlice';
 
 import { useInView } from 'react-intersection-observer';
 import { useSelector } from '../../services/store';

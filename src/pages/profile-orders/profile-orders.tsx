@@ -3,7 +3,11 @@ import { TOrder } from '@utils-types';
 import { FC } from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from '../../services/store';
-import { loading, userOrders, getUserOrders } from '../../services/user-slice';
+import {
+  loading,
+  userOrders,
+  getUserOrders
+} from '../../services/slices/userSlice';
 import { Preloader } from '@ui';
 
 export const ProfileOrders: FC = () => {

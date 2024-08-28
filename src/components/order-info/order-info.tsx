@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../services/store';
 import { findOrderByNumber } from '../../services/selector';
 import { useEffect } from 'react';
-import { getOrderByNumber } from '../../services/feed-slice';
+import { getOrderByNumber } from '../../services/slices/feedSlice';
 
 export const OrderInfo: FC = () => {
   const { number } = useParams();

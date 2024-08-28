@@ -40,7 +40,12 @@ const ingredientsSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Failed to fetch ingredients';
       });
+  },
+  selectors: {
+    getAllIngredients: (state) => state.data,
+    loading: (state) => state.loading
   }
 });
 
-export default ingredientsSlice.reducer;
+export default ingredientsSlice;
+export const { getAllIngredients, loading } = ingredientsSlice.selectors;

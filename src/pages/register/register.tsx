@@ -1,6 +1,9 @@
 import { FC, useState } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
-import { registerUser, responseError } from '../../services/slices/userSlice';
+import {
+  registerUser,
+  responseError
+} from '../../services/slices/userSlice/userSlice';
 import { RegisterUI } from '../../components/ui/pages/register';
 
 export const Register: FC = () => {

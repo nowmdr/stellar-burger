@@ -1,7 +1,7 @@
 import { rootReducer } from './store';
 import ingredientsSlice from './slices/ingredientsSlice/ingredientsSlice';
 import feedSlice from './slices/feedSlice/feedSlice';
-import userSlice from './slices/userSlice';
+import userSlice from './slices/userSlice/userSlice';
 import burgerConstructorSlice from './slices/burgerConstructorSlice/burgerConstructorSlice';
 
 describe('rootReducer', () => {

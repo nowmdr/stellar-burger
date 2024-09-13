@@ -1,6 +1,6 @@
 import { rootReducer } from './store';
 import ingredientsSlice from './slices/ingredientsSlice/ingredientsSlice';
-import feedSlice from './slices/feedSlice';
+import feedSlice from './slices/feedSlice/feedSlice';
 import userSlice from './slices/userSlice';
 import burgerConstructorSlice from './slices/burgerConstructorSlice/burgerConstructorSlice';
 

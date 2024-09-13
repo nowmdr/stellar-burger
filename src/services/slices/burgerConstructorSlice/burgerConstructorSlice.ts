@@ -1,5 +1,5 @@
 import { TConstructorIngredient, TIngredient, TOrder } from '@utils-types';
-import { orderBurgerApi } from '@api';
+import { orderBurgerApi } from '../../../utils/burger-api';
 import {
   createSlice,
   createAsyncThunk,
@@ -7,7 +7,7 @@ import {
   nanoid
 } from '@reduxjs/toolkit';
 
-interface BurgerConstructorSliceState {
+export interface BurgerConstructorSliceState {
   constructorItems: {
     bun: TIngredient | null;
     ingredients: TConstructorIngredient[];
@@ -18,7 +18,7 @@ interface BurgerConstructorSliceState {
   error: null | string | undefined;
 }
 
-const initialState: BurgerConstructorSliceState = {
+export const initialState: BurgerConstructorSliceState = {
   constructorItems: {
     bun: null,
     ingredients: []
@@ -88,6 +88,7 @@ export const burgerConstructorSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createOrder.pending, (state) => {
+        state.loading = true;
         state.orderRequest = true;
         state.error = null;
       })
@@ -101,6 +102,7 @@ export const burgerConstructorSlice = createSlice({
         state.constructorItems.bun = null;
         state.constructorItems.ingredients = [];
         state.error = null;
+        state.loading = false;
       });
   },
   selectors: {

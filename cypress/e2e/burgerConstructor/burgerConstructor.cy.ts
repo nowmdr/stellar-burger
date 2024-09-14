@@ -1,16 +1,4 @@
-const localUrl = 'http://localhost:4000/';
-const constructorMain = '[data-cy="constructorMain"]';
-const dataMains = '[data-cy="mains"]';
-const constructorBun = '[data-cy="constructorBun"]';
-const dataBuns = '[data-cy="buns"]';
-const dataSauces = '[data-cy="sauces"]';
-
-const bunTitle = 'Краторная булка N-200i';
-const modalTitle = 'Детали ингредиента';
-const dataModalButtonClose = '[data-cy="modalButtonClose"]';
-const dataModalOverlay = '[data-cy="modalOverlay"]';
-const dataButtonCreateOrder = '[data-cy="buttonCreateOrder"]';
-const orderNumber = '911';
+import { ingredients, modal, globalInfo } from 'cypress/support/selectors';
 
 describe('Интеграционные тесты для страницы конструктора бургера', () => {
   beforeEach(() => {
@@ -23,8 +11,9 @@ describe('Интеграционные тесты для страницы кон
     );
     cy.setCookie('accessToken', 'testAccessToken');
     localStorage.setItem('refreshToken', 'testRefreshToken');
-    cy.visit(localUrl);
+    cy.visit(globalInfo.localUrl);
   });
+
   afterEach(() => {
     cy.clearLocalStorage();
     cy.clearCookies();
@@ -32,59 +21,70 @@ describe('Интеграционные тесты для страницы кон
 
   it('Добавление ингредиентов в конструктор', () => {
     // Добавление булки
-    cy.get(dataBuns).contains('Добавить').click();
-    cy.get(constructorBun).should('contain', 'Краторная булка N-200i');
-
-    // Добавление начинки
-    cy.get(dataMains).contains('Добавить').click();
-    cy.get(constructorMain).should(
-      'contain',
-      'Биокотлета из марсианской Магнолии'
+    cy.addingIngredient(
+      ingredients.bun.data,
+      ingredients.bun.constructor,
+      ingredients.bun.name
     );
-
+    // Добавление начинки
+    cy.addingIngredient(
+      ingredients.main.data,
+      ingredients.main.constructor,
+      ingredients.main.name
+    );
     // Добавление соуса
-    cy.get(dataSauces).contains('Добавить').click();
-    cy.get(constructorMain).should('contain', 'Соус Spicy-X');
+    cy.addingIngredient(
+      ingredients.sauce.data,
+      ingredients.sauce.constructor,
+      ingredients.sauce.name
+    );
   });
 
   it('Работа модальных окон', () => {
-    // Открытие модального окна ингредиента
-    cy.contains(bunTitle).click();
-    cy.contains(modalTitle).should('exist');
-
-    // Закрытие модального окна по клику на крестик
-    cy.get(dataModalButtonClose).click();
-    cy.contains(modalTitle).should('not.exist');
-
-    // Открытие модального окна снова
-    cy.contains(bunTitle).click();
-    cy.contains(modalTitle).should('exist');
-
-    // Закрытие модального окна по клику на оверлей
-    cy.get(dataModalOverlay).click({ force: true });
-    cy.contains(modalTitle).should('not.exist');
+    // Проверка при клике на булку
+    cy.checkIngredientModal(
+      ingredients.bun.name,
+      modal.closeButtonData,
+      modal.overlayData
+    );
+    // Проверка при клике на начинку
+    cy.checkIngredientModal(
+      ingredients.main.name,
+      modal.closeButtonData,
+      modal.overlayData
+    );
+    // Проверка при клике на соус
+    cy.checkIngredientModal(
+      ingredients.sauce.name,
+      modal.closeButtonData,
+      modal.overlayData
+    );
   });
 
   it('Создание заказа', () => {
     // Добавление ингредиентов
-    cy.get(dataBuns).contains('Добавить').click();
-    cy.get(dataMains).contains('Добавить').click();
-    cy.get(dataSauces).contains('Добавить').click();
+    cy.addAllIngredientsToCart();
 
     // Оформление заказа
-    cy.get(dataButtonCreateOrder).click();
-    cy.contains(orderNumber).should('exist');
+    cy.get(globalInfo.createOrderBtnData).click();
+    cy.contains(globalInfo.orderNumber).should('exist');
 
     // Закрытие модального окна
-    cy.get(dataModalButtonClose).click();
-    cy.contains(orderNumber).should('not.exist');
+    cy.get(modal.overlayData).click({ force: true });
+    cy.contains(globalInfo.orderNumber).should('not.exist');
 
     // Проверка, что конструктор пуст
-    cy.get(constructorBun).should('not.contain', 'Краторная булка N-200i');
-    cy.get(constructorMain).should(
+    cy.get(ingredients.bun.constructor).should(
       'not.contain',
-      'Биокотлета из марсианской Магнолии'
+      ingredients.bun.name
     );
-    cy.get(constructorMain).should('not.contain', 'Соус Spicy-X');
+    cy.get(ingredients.main.constructor).should(
+      'not.contain',
+      ingredients.main.name
+    );
+    cy.get(ingredients.main.constructor).should(
+      'not.contain',
+      ingredients.sauce.name
+    );
   });
 });

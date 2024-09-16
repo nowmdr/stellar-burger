@@ -8,8 +8,8 @@ import {
   logoutApi,
   updateUserApi,
   getOrdersApi
-} from '../../utils/burger-api';
-import { setCookie, getCookie, deleteCookie } from '../../utils/cookie';
+} from '../../../utils/burger-api';
+import { setCookie, getCookie, deleteCookie } from '../../../utils/cookie';
 import { TUser, TOrder } from '@utils-types';
 import { stat } from 'fs';
 
@@ -22,7 +22,7 @@ interface UserState {
   isAuthenticated: boolean;
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
   user: null,
   orders: [],
   loading: false,

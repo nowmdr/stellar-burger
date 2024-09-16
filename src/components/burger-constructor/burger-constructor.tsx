@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useSelector, useDispatch } from '../../services/store';
-import { isAuthenticated } from '../../services/slices/userSlice';
+import { isAuthenticated } from '../../services/slices/userSlice/userSlice';
 import { useNavigate } from 'react-router-dom';
 import {
   createOrder,
@@ -10,7 +10,7 @@ import {
   getConstructorItems,
   getOrderRequest,
   getOrderModalData
-} from '../../services/slices/burgerConstructorSlice';
+} from '../../services/slices/burgerConstructorSlice/burgerConstructorSlice';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
